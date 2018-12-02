@@ -81,8 +81,10 @@ void *realloc537(void *ptr, size_t size){
 void memcheck537(void *ptr,size_t size){
 	node * temp = search(ptr);
 	if(temp == NULL){
-		
+		printf("hasn't allocated");
 			}
 
-
+	else if (size > temp -> len){
+	printf("trying to use %d bytes,but pointer %p has only %d\n",(int)size,ptr,(int)temp -> len);
+	}
 }

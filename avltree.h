@@ -35,6 +35,9 @@ void insert_node(struct node * input);
 
 void delete_node(struct node * input);
 
+// search address
+struct node * search(int add);
+
 
 
 

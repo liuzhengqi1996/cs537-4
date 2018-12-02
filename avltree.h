@@ -19,20 +19,21 @@
 //define the node of avltree
 typedef struct node
 {
-	struct node * parent;
 	struct node * left;
 	struct node * right;
 	void * add;
 	size_t len;
+	int flag;
+	int height;
 }node;
 
 //create the node in the tree
-node * create(void *add, size_t len);
+node * create_node(void *add, size_t len);
 
 //insert the node 
-void insert(struct node * input);
+void insert_node(struct node * input);
 
-void 
+void delete_node(struct node * input);
 
 
 

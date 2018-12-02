@@ -18,14 +18,15 @@
 #include "malloc537.h"
 #include "avltree.h"
 
-extern node * root;
+extern node * root;//the node of memory tree
+
 
 /*
  allocate memory by malloc, store a tuple of address and length in AVL Tree
  */
 
 
-void * malloc537(size_t size){
+void * malloc537(size_t size){i
 	void * return_ptr;
 	node * remove_node = NULL;
 	if(size == 0){
@@ -33,6 +34,7 @@ void * malloc537(size_t size){
 		     }
 	return_ptr = malloc(size);
 
+	create_ptr(return_ptr,size);
 
 
 				}

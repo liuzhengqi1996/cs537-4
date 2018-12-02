@@ -34,7 +34,7 @@ node * create_node(void *add, size_t len);
 node *  insert_node(struct node * input);
 
 //delete the node
-node * void delete_node(struct node * input);
+node * delete_node(struct node * input);
 
 // search address
 struct node * search(struct node * input);

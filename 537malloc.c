@@ -36,7 +36,7 @@ void * malloc537(size_t size){
 	void * return_ptr;
 	//malloc a size 0 pointer
 	if(size == 0){
-		printf("allocating a pointer of size 0\n");
+		printf("malloc537: Need to malloc a size 0 pointer.\n");
 		     }
 	//malloc the pointer
 	return_ptr = malloc(size);
@@ -58,18 +58,18 @@ void free537(void *ptr){
 	//search the pointer in the tree
 	temp=search_node(root,ptr);
 	if (ptr == NULL){
-		printf("freeing a null pointer\n");	
-		exit(-1);	
+		printf("free537: Freeing a null pointer\n");
+		exit(0);	
 			}
-	//if ptr cannot be found in tree, then means the memory has not be allocated eith malloc537().
+	//if ptr cannot be found in tree, then means the memory has not be allocated with malloc537().
 	else if(temp == NULL){
-		printf("free memory has not been allocated by malloc537\n");
-		exit(-1);
+		printf("free537: Freeing memory has not been allocated by malloc537\n");
+		exit(0);
 			}
 	//check if the pointer is double freed
 	if(temp -> flag == 0){
-		printf("double free\n");
-		exit(-1);		
+		printf("free537: Freeing memory that was previously freed (double free)\n");
+		exit(0);		
 				}
 	//turn the node flag to 0, free the pointer
 	temp -> flag =0;
@@ -85,7 +85,7 @@ void *realloc537(void *ptr, size_t size){
 	}
 	//if size is 0,same to free537
 	else if(size == 0){
-		printf("recallocating for size 0");
+		printf("realloc537: Need to realloc a size 0 pointer.\n");
 		free537(ptr);
 		return NULL;
 			}
@@ -102,22 +102,21 @@ void *realloc537(void *ptr, size_t size){
 		insert_node(root,return_ptr,size);
 		return return_ptr;	
 	}
-
-				}
+}
 
 void memcheck537(void *ptr,size_t size){
 	//search the pointer in the tree
 	Node * temp = search_node(root,ptr);
 	if(temp == NULL){
-		printf("the pointer hasn't allocated\n");
-		exit(-1);		
+		printf("memcheck537: The pointer has not been allocated before.\n");
+		exit(0);	
 	}
 	//check if the pointer has been freed
 	else if (temp ->flag == 0){
-		printf("the pointer has benn freed\n");
+		printf("memcheck537: The pointer has already been freed.\n");
 	}
 	//check if the size is out of the range of pointer
 	else if (size > temp -> len){
-	printf("trying to use %d bytes,but pointer %p has only %d\n",(int)size,ptr,(int)temp -> len);
+		printf("memcheck537: The pointer %p contains %d byte when %d bytes is needed.\n", ptr, (int)temp -> len, (int)size);
 	}
 }

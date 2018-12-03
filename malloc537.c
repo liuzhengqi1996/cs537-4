@@ -38,14 +38,15 @@ void * malloc537(size_t size){
 		root = delete_node(root,return_ptr+i);
 	}
 	//insert the node to the tree
-	insert_node(newnode);
+	insert_node(root,newnode);
 	return return_ptr;
 				}
 
 void free537(void *ptr){
 	//search ptr in the tree
 	Node *temp = (Node*)malloc(sizeof(Node));
-	temp=search_node(ptr);
+	//search the pointer in the tree
+	temp=search_node(root,ptr);
 	if (ptr == NULL){
 		printf("freeing a null pointer");	
 		exit(-1);	
@@ -79,21 +80,22 @@ void *realloc537(void *ptr, size_t size){
 			}
 	//general case
 	else{
-		Node * temp = search(ptr);
+		//search the pointer in the tree
+		Node * temp = search(root,ptr);
 		//if the pointer has been allocated ,delete it
-		if (temp != NULL) root = delete_node(temp);
-		delete_node(temp);
+		if (temp != NULL) root = delete_node(root,temp);
 		//realloc for the pointer
 		return_ptr = realloc(ptr,size);
 		//create node for the return_ptr,and insert it in to tree
-		node * newnode = create_node(return_ptr);
-		insert_node(newnode);
+		node * newnode = create_node(return_ptr,size);
+		insert_node(root,newnode);
 		}
 
 				}
 
 void memcheck537(void *ptr,size_t size){
-	Node * temp = search(ptr);
+	//search the pointer in the tree
+	Node * temp = search(root,ptr);
 	if(temp == NULL){
 		printf("hasn't allocated");
 			}

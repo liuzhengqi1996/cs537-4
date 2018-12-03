@@ -35,7 +35,7 @@ Node *create_node(void *address, size_t length) {
  */
 int get_height(Node *node) { 
     // If the node is null, return 0, otherwise, return height of node
-	if (node == null) {
+	if (node == NULL) {
 		return 0;
 	}
 	return node -> height;
@@ -208,7 +208,7 @@ Node* delete_node(Node *node, void *address) {
 		node -> flag = replacement -> flag;
 		node -> height = replacement -> height;
 		// Recursively delete replacement node from left subtree
-		node -> left = delete_node(node -> left, replacement -> address);
+		node -> left = delete_node(node -> left, replacement -> addr);
 	}
 	
 	// Update height of node

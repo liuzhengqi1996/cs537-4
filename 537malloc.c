@@ -52,27 +52,31 @@ void * malloc537(size_t size){
 				}
 
 void free537(void *ptr){
+	int *temp1 = search_range(root, ptr);
+	
 	//search ptr in the tree
-	Node *temp;
-       //	= (Node*)malloc(sizeof(Node));
-	//search the pointer in the tree
-	temp=search_node(root,ptr);
+	Node *temp2 =search_node(root,ptr);
 	if (ptr == NULL){
-		printf("free537: Freeing a null pointer\n");
-		exit(0);	
+		printf("free537: Freeing a null pointer\n");	
+		exit(-1);	
 			}
-	//if ptr cannot be found in tree, then means the memory has not be allocated with malloc537().
-	else if(temp == NULL){
+	//if ptr cannot be found in tree or any range within the tree, then the memory has not be allocated previously
+	else if(temp1 == 0 && temp2 == NULL){
 		printf("free537: Freeing memory has not been allocated by malloc537\n");
-		exit(0);
+		exit(-1);
 			}
+	// If ptr can be found in the range, but not as the start address
+	else if (temp1 == 1 && temp2 == NULL) {
+		printf("free537: Freeing memory that is not the first byte of the range of memory that was allocated\n");
+		exit(-1);
+	}
 	//check if the pointer is double freed
-	if(temp -> flag == 0){
+	if(temp2 -> flag == 0){
 		printf("free537: Freeing memory that was previously freed (double free)\n");
-		exit(0);		
+		exit(-1);		
 				}
 	//turn the node flag to 0, free the pointer
-	temp -> flag =0;
+	temp2 -> flag =0;
 	free(ptr);	
 	}
 

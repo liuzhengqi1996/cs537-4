@@ -24,6 +24,7 @@ extern Node* right_rotate(Node* node);
 extern Node* delete_node(Node *node, void *address);
 extern Node* in_order_predecessor(Node *node);
 extern Node* search_node(Node *node, void *address);
+extern int search_range(Node *node, void *address);
 
 /*
  * create_node - create an AVL tree node and initialize the node.
@@ -275,22 +276,46 @@ Node* in_order_predecessor(Node *node) {
  * search_node - search for a node matching the given address
  */
 Node* search_node(Node *node, void *address) {
-	// If the node is null, the node can't be found, return null
-	if (node == NULL) {
-		return NULL;
+	// Traverse the tree to search
+	while (node != NULL) {
+		// If address is smaller than current node address, search in left subtree
+		if (address < node -> addr) {
+			node = node -> left;
+		}
+		// If address is larger than current node address, search in left subtree
+		else if (address > node -> addr) {
+			node = node -> right;
+		}
+		// If a matching address is found, return the node
+		else {
+			return node;
+		}
 	}
 	
-	// If a matching address is found, return the node
-	if (address == node -> addr) {
-		return node;
+	// If reaches null, the node can't be found, return null
+	return NULL;
+}
+
+/*
+ * search_range - search for an address that matches the range in any node
+ */
+int search_range(Node *node, void *address) {
+	// Traverse the tree to search
+	while (node != NULL) {
+		// If address is smaller than current node address+length, search in left subtree
+		if (address < node -> addr && address < (node -> addr + node -> len)) {
+			node = node -> left;
+		}
+		// If address is larger than current node address+length, search in left subtree
+		else if (address > node -> addr && address > (node -> addr + node -> len)) {
+			node = node -> right;
+		}
+		// If a matching address is found within the range, return 1
+		else {
+			return 1;
+		}
 	}
 	
-	// If address is smaller than current node address, search in left subtree,
-	// otherwise, search in right subtree
-	if (address < node -> addr) {
-		return search_node(node -> left, address);
-	}
-	else {
-		return search_node(node -> right, address);
-	}
+	// If reaches null, the node can't be found, return 0
+	return 0;
 }

@@ -73,3 +73,8 @@ Node* in_order_predecessor(Node *node);
  * search_node - search for a node matching the given address
  */
 Node* search_node(Node *node, void *address);
+
+/*
+ * search_range - search for an address that matches the range in any node
+ */
+int search_range(Node *node, void *address);

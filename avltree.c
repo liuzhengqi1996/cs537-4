@@ -15,6 +15,16 @@
 #include <stdlib.h>
 #include "avltree.h"
 
+extern Node* create_node(void *address, size_t length);
+extern int get_height(Node *node);
+extern Node* insert_node(Node* node, void *address, size_t length);
+extern int balance_factor(Node* node);
+extern Node* left_rotate(Node* node);
+extern Node* right_rotate(Node* node);
+extern Node* delete_node(Node *node, void *address);
+extern Node* in_order_predecessor(Node *node);
+extern Node* search_node(Node *node, void *address);
+
 /*
  * create_node - create an AVL tree node and initialize the node.
  */

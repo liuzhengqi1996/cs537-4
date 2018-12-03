@@ -50,7 +50,7 @@ void * malloc537(size_t size){
 	root= insert_node(root,return_ptr,size);
 	return return_ptr;
 				}
-
+//free537 is a safe free function
 void free537(void *ptr){
 	int *temp1 = search_range(root, ptr);
 	
@@ -80,7 +80,7 @@ void free537(void *ptr){
 	free(ptr);	
 	}
 
-
+//similar to realloc, but checking on the pointer
 void *realloc537(void *ptr, size_t size){
 	void * return_ptr;
 	//if ptr is NULL,same as malloc537
@@ -107,7 +107,7 @@ void *realloc537(void *ptr, size_t size){
 		return return_ptr;	
 	}
 }
-
+//check pointer with address and the range
 void memcheck537(void *ptr,size_t size){
 	//search the pointer in the tree
 	Node * temp = search_node(root,ptr);

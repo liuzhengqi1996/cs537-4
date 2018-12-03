@@ -10,12 +10,17 @@
 // CS Login:         zhengqi, tian
 // NetID:            mliu292, tzheng24
 ////////////////////////////////////////////////////////////////////////////////
-#include <studio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include "malloc537.h"
 #include "avltree.h"
 
-extern Node * root;//the node of memory tree
+extern void * malloc537(size_t size);
+extern void free537(void *ptr);
+extern void *realloc537(void *ptr,size_t size);
+extern void memcheck537(void *ptr,size_t size);
+extern Node * root = (Node*)malloc(sizeof(Node));//the node of memory tree
+
 
 
 /*
@@ -32,13 +37,13 @@ void * malloc537(size_t size){
 	//malloc the pointer
 	return_ptr = malloc(size);
 	//create a node for this pointer
-	Node * newnode = create_node(return_ptr,size);
+	//Node * newnode = create_node(return_ptr,size);
 	//if allocated memory was previously freed,delete all the nodes in the range
 	for (long i=0;i<size;i++ ){
 		root = delete_node(root,return_ptr+i);
 	}
 	//insert the node to the tree
-	insert_node(root,newnode);
+	root= insert_node(root,return_ptr,size);
 	return return_ptr;
 				}
 
@@ -53,12 +58,12 @@ void free537(void *ptr){
 			}
 	//if ptr cannot be found in tree, then means the memory has not be allocated eith malloc537().
 	if(temp == NULL){
-		print("free memory has not be allocated by malloc537");
+		printf("free memory has not be allocated by malloc537");
 		exit(-1);
 			}
 	//check if the pointer is double freed
 	if(temp -> flag == 0){
-		print("double free");
+		printf("double free");
 		exit(-1);		
 				}
 	//turn the node flag to 0, free the pointer
@@ -68,7 +73,7 @@ void free537(void *ptr){
 
 
 void *realloc537(void *ptr, size_t size){
-	void * return_pointer;
+	void * return_ptr;
 	//if ptr is NULL,same as malloc537
 	if(ptr == NULL){
 		return malloc537(size);
@@ -81,21 +86,21 @@ void *realloc537(void *ptr, size_t size){
 	//general case
 	else{
 		//search the pointer in the tree
-		Node * temp = search(root,ptr);
+		Node * temp = search_node(root,ptr);
 		//if the pointer has been allocated ,delete it
 		if (temp != NULL) root = delete_node(root,temp);
 		//realloc for the pointer
 		return_ptr = realloc(ptr,size);
 		//create node for the return_ptr,and insert it in to tree
-		node * newnode = create_node(return_ptr,size);
-		insert_node(root,newnode);
+		//node * newnode = create_node(return_ptr,size);
+		insert_node(root,return_ptr,size);
 		}
 
 				}
 
 void memcheck537(void *ptr,size_t size){
 	//search the pointer in the tree
-	Node * temp = search(root,ptr);
+	Node * temp = search_node(root,ptr);
 	if(temp == NULL){
 		printf("hasn't allocated");
 			}

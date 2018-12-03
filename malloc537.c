@@ -20,6 +20,8 @@ extern void free537(void *ptr);
 extern void *realloc537(void *ptr,size_t size);
 extern void memcheck537(void *ptr,size_t size);
 static Node * root;
+//root -> right = NULL;
+//root -> left = NULL;
 
 //= (Node*)malloc(sizeof(Node));//the node of memory tree
 
@@ -96,7 +98,8 @@ void *realloc537(void *ptr, size_t size){
 		//create node for the return_ptr,and insert it in to tree
 		//node * newnode = create_node(return_ptr,size);
 		insert_node(root,return_ptr,size);
-		}
+		return return_ptr;	
+	}
 
 				}
 
@@ -104,10 +107,10 @@ void memcheck537(void *ptr,size_t size){
 	//search the pointer in the tree
 	Node * temp = search_node(root,ptr);
 	if(temp == NULL){
-		printf("hasn't allocated\n");
+		printf("the pointer hasn't allocated\n");
 			}
 	//check if the pointer has been freed
-	else if (temp ->flag = 0){
+	else if (temp ->flag == 0){
 		printf("the pointer has benn freed\n");
 	}
 	//check if the size is out of the range of pointer

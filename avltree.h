@@ -8,37 +8,68 @@
 // CS Login:         zhengqi, tian
 // NetID:            mliu292, tzheng24
 ////////////////////////////////////////////////////////////////////////////////
-/*
- 
-
-
-
- */
 
 #include <sys/types.h>
-//define the node of avltree
-typedef struct node
+
+// Structure for AVL tree node
+typedef struct Node
 {
-	struct node * left;
-	struct node * right;
-	void * add;
+	// Address of the pointer and its range
+	void *addr;
 	size_t len;
+	
+	// Left and right children of the node
+	struct Node *left;
+	struct Node *right;
+	
+	// Use 1 to indicate allocated memory, use 0 to indicate freed memory
 	int flag;
+	
+	// Height of the node in AVL tree
 	int height;
-}node;
+} Node;
 
-//create the node in the tree
-node * create_node(void *add, size_t len);
+/*
+ * create_node - create an AVL tree node and initialize the node.
+ */
+Node* create_node(void *address, size_t length);
 
-//insert the node 
-node *  insert_node(struct node * input);
+/*
+ * get_height - return the height of the node in AVL tree.
+ */
+int get_height(Node *node);
 
-//delete the node
-node * delete_node(struct node * input);
+/*
+ * insert_node - return the height of the node in AVL tree.
+ */
+Node* insert_node(Node* node, void *address, size_t length);
 
-// search address
-struct node * search(struct node * input);
+/*
+ * balance_factor - calculate the balance factor of a node.
+ */
+int balance_factor(Node* node);
 
+/*
+ * left_rotate - do left rotation at a node.
+ */
+Node* left_rotate(Node* node);
 
+/*
+ * right_rotate - do right rotation at a node.
+ */
+Node* right_rotate(Node* node);
 
+/*
+ * delete_node - delete a node from AVL tree.
+ */
+Node* delete_node(Node *node, void *address);
 
+/*
+ * in_order_predecessor - find in-order predecessor of a node from AVL tree.
+ */
+Node* in_order_predecessor(Node *node);
+
+/*
+ * search_node - search for a node matching the given address
+ */
+Node* search_node(Node *node, void *address);

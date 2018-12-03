@@ -55,17 +55,17 @@ void free537(void *ptr){
 	//search the pointer in the tree
 	temp=search_node(root,ptr);
 	if (ptr == NULL){
-		printf("freeing a null pointer");	
+		printf("freeing a null pointer\n");	
 		exit(-1);	
 			}
 	//if ptr cannot be found in tree, then means the memory has not be allocated eith malloc537().
 	if(temp == NULL){
-		printf("free memory has not be allocated by malloc537");
+		printf("free memory has not be allocated by malloc537\n");
 		exit(-1);
 			}
 	//check if the pointer is double freed
 	if(temp -> flag == 0){
-		printf("double free");
+		printf("double free\n");
 		exit(-1);		
 				}
 	//turn the node flag to 0, free the pointer
@@ -104,11 +104,11 @@ void memcheck537(void *ptr,size_t size){
 	//search the pointer in the tree
 	Node * temp = search_node(root,ptr);
 	if(temp == NULL){
-		printf("hasn't allocated");
+		printf("hasn't allocated\n");
 			}
 	//check if the pointer has been freed
 	else if (temp ->flag = 0){
-		printf("the pointer has benn freed");
+		printf("the pointer has benn freed\n");
 	}
 	//check if the size is out of the range of pointer
 	else if (size > temp -> len){

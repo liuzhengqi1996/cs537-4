@@ -1,19 +1,56 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "537malloc.h"
 
-int main() {
-	printf("Allocating 10 * sizeof(int) memory\n");
-	int *ptr = malloc537(sizeof(int) * 10);
+struct testNode {
+	int val;
+	char name;
+};
 
-	printf("Allocated memory location : %p\n", ptr);
-	ptr--;
-	printf("After decrement, ptr value : %p\n", ptr);
+int main()
+{
+	// 1-A: Simple testcase - Memory Allocation
+	printf("Allocating 10 bytes of Memory\n");
+	char *this_ptr = malloc537(sizeof(char) * 10);
+	if(this_ptr == NULL) {
+		printf("Memory allocation failed!\n");
+		exit(1);
+	}
 
-	printf("Freeing : %p\n", ptr);
-	// Should throw an error
-	free537(ptr);
+	// 1-B: Simple testcase - Memory check 1st 5 byts
+	printf("Checking first 5 bytes of %p\n", this_ptr);
+	memcheck537(this_ptr, 5);
 
-	printf("This statment should not be printed");
+	strncpy(this_ptr, "hello world", 10);
+	printf("Content : %s\n", this_ptr);
+
+	// 1-C: Simple testcase - Memory check last 5 bytes
+	printf("Checking last 5 bytes of %p\n", this_ptr);
+	memcheck537(this_ptr + 5, 5);
+
+	printf("Freeing memory : %p\n", this_ptr);
+	// 1-D: Correct Free
+	free537(this_ptr);
+	printf("Successfully freed memory!\n");
+
+	// 1-E: Same cases as above
+	printf("Allocating memory for the struct\n");
+	struct testNode *new_ptr = (struct testNode *)malloc537(sizeof(struct testNode));
+	if(new_ptr == NULL) {
+		printf("Memory allocation failed!\n");
+		exit(1);
+	}
+	printf("Allocated Memory : %p\n", new_ptr);
+	printf("Allocated size : %ld\n", sizeof(struct testNode));
+
+	printf("Checking 1st 5 bytes of memory allocated\n");
+	memcheck537(new_ptr, 5);
+
+	printf("Freeing the structure pointer : %p\n", new_ptr);
+	free(new_ptr);
+
+	printf("If this prints, everything is success!\n");
 	return 0;
 }
 

@@ -43,7 +43,7 @@ void * malloc537(size_t size){
 	//create a node for this pointer
 	//Node * newnode = create_node(return_ptr,size);
 	//if allocated memory was previously freed,delete all the nodes in the range
-	for (long i=0;i<size;i++ ){
+	for (size_t i=0;i<size;i++ ){
 		root = delete_node(root,return_ptr+i);
 	}
 	//insert the node to the tree
@@ -53,7 +53,8 @@ void * malloc537(size_t size){
 
 void free537(void *ptr){
 	//search ptr in the tree
-	Node *temp = (Node*)malloc(sizeof(Node));
+	Node *temp;
+       //	= (Node*)malloc(sizeof(Node));
 	//search the pointer in the tree
 	temp=search_node(root,ptr);
 	if (ptr == NULL){
@@ -61,7 +62,7 @@ void free537(void *ptr){
 		exit(-1);	
 			}
 	//if ptr cannot be found in tree, then means the memory has not be allocated eith malloc537().
-	if(temp == NULL){
+	else if(temp == NULL){
 		printf("free memory has not been allocated by malloc537\n");
 		exit(-1);
 			}

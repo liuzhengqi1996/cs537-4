@@ -19,7 +19,8 @@ extern void * malloc537(size_t size);
 extern void free537(void *ptr);
 extern void *realloc537(void *ptr,size_t size);
 extern void memcheck537(void *ptr,size_t size);
-static Node * root = (Node*)malloc(sizeof(Node));//the node of memory tree
+static Node * root ;
+//= (Node*)malloc(sizeof(Node));//the node of memory tree
 
 
 

@@ -154,7 +154,6 @@ Node* right_rotate(Node* node) {
 	// Create grandparent node and parent node
 	Node *G = node;
 	Node *P = G -> left;
-	Node *K = P -> left;
 	G -> left = P -> right;
 	P -> right = G;
 	

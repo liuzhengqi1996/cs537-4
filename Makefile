@@ -2,18 +2,18 @@ CC=gcc
 SCAN_BUILD_DIR = scan-build-out
 EXE=output
 
-all: main.o malloc537.o avltree.o
-	$(CC) -o $(EXE) main.o malloc537.o avltree.o
+all: main.o 537malloc.o avltree.o
+	$(CC) -o $(EXE) main.o 537malloc.o avltree.o
 
 # main.c is your testcase file name
 main.o: main.c
 	$(CC) -Wall -Wextra -c main.c
 
 # Include all your .o files in the below rule
-obj: malloc537.o avltree.o
+obj: 537malloc.o avltree.o
 
-malloc537.o: malloc537.c malloc537.h avltree.h
-	$(CC) -Wall -Wextra -g -O0 -c malloc537.c
+537malloc.o: 537malloc.c 537malloc.h avltree.h
+	$(CC) -Wall -Wextra -g -O0 -c 537malloc.c
 
 avltree.o: avltree.c avltree.h
 	$(CC) -Wall -Wextra -g -O0 -c avltree.c

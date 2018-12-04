@@ -12,17 +12,17 @@ routines that checks on common heap and usage mistake.
 
 This program is divided into two modules.
 
-The 537malloc module include four functions.
+The 537malloc module includes four functions.
 malloc537 is a safe malloc method to allocate memory by calling malloc
 and store a tuple of address and length in AVL Tree.
 free537 is a safe free method to safely free the memory specified by a 
 pointer and report error conditions.
 realloc537 allocates memory for a pointer, store a tuple of address and
 length in AVL Tree.
-memcheck537 check if the address range specified by address ptr and 
+memcheck537 checks if the address range specified by address ptr and 
 length size are fully within a range allocated and memory not yet freed.
 
-The range_tree module include functions to implement an AVL tree.
+The range_tree module includes functions to implement an AVL tree.
 Each node has the contain the pointer address, length, left and right 
 children of the node, flag to indicate allocated or freed memory and 
 height of node.

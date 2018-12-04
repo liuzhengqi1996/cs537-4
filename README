@@ -1,0 +1,30 @@
+Course: CS 537
+Program: Programming Assignment #4 A Safe malloc/free library
+Instructor: Barton Miller
+Semester: Fall 2018
+Lecture: Lec 001
+Authors: Zhengqi Liu, Tian Zheng
+CS Login: zhengqi, tian
+NetID: mliu292, tzheng24
+
+This program writes a special version of the malloc and free library 
+routines that checks on common heap and usage mistake.
+
+This program is divided into two modules.
+
+The 537malloc module include four functions.
+malloc537 is a safe malloc method to allocate memory by calling malloc
+and store a tuple of address and length in AVL Tree.
+free537 is a safe free method to safely free the memory specified by a 
+pointer and report error conditions.
+realloc537 allocates memory for a pointer, store a tuple of address and
+length in AVL Tree.
+memcheck537 check if the address range specified by address ptr and 
+length size are fully within a range allocated and memory not yet freed.
+
+The range_tree module include functions to implement an AVL tree.
+Each node has the contain the pointer address, length, left and right 
+children of the node, flag to indicate allocated or freed memory and 
+height of node.
+There are functions to support the functionalities of inserting node, 
+deleting node, searching node, and searching range.

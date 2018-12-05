@@ -102,7 +102,7 @@ void *realloc537(void *ptr, size_t size) {
 		void *return_ptr = realloc(ptr, size);
 		
 		// Insert the new node into AVL tree
-		insert_node(root, return_ptr, size);
+		root = insert_node(root, return_ptr, size);
 		return return_ptr;	
 	}
 }
